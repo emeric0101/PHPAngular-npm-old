@@ -1,0 +1,26 @@
+{
+    "name": "emeri/phpangular-test",
+    "authors": [
+        {
+            "name": "emeric",
+            "email": "Emeric0101@hotmail.fr"
+        }
+    ],
+	"repositories": [
+    {
+        "type":"vcs",
+        "url":"../phpangular"
+    }
+	],
+    "require": {
+		"emeric0101/phpangular":"dev-master"
+	},
+    "autoload": {
+    "psr-4": {
+        "Emeric0101\\PHPAngular\\Entity\\": "src/Entity/",
+        "Emeric0101\\PHPAngular\\Repository\\": "src/Repository/",
+        "Emeric0101\\PHPAngular\\Controller\\": "src/Controller/",
+        "Emeric0101\\PHPAngular\\Service\\": "src/Service/"
+    }
+}
+}
