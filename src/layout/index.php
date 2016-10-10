@@ -18,7 +18,7 @@
   </head>
   <!-- 3. Display the application -->
   <body>
-    <base href="/">
-    <my-app>Loading...</my-app>
+    <base href="/phpangular-test/">
+    <phpangular-app>Loading...</phpangular-app>
   </body>
 </html>

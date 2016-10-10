@@ -77,7 +77,7 @@ RewriteCond %{REQUEST_URI} \.(html)$
 RewriteRule .* - [L]
 #
 
-RewriteCond %{REQUEST_URI} \.(css|js|pdf|docx|ttf|eot|svg|ico|woff|woff2)$
+RewriteCond %{REQUEST_URI} \.(css|js|pdf|docx|ttf|eot|svg|ico|woff|woff2|map)$
 RewriteRule .* - [L]
 
 RewriteRule .* index.php [NC,QSA]

@@ -21,6 +21,7 @@ final class Config {
         'viewport' => 'width=device-width, initial-scale=1'
     ];
     static $ResolveTargetEntities = [
+        'Emeric0101\\PHPAngular\\Entity\\IUser' => 'Emeric0101\\PHPAngular\\Entity\\User'
     ];
 
 }

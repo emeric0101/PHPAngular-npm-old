@@ -12,6 +12,6 @@ vendor/*
 node_modules/*
 composer.lock
 typings/*
-*.js
+app/*.js
 *.map
 *.phar
