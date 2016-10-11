@@ -12,6 +12,10 @@
 
 ### Todo
 - [ ] Combine post request into one
+- [ ] var defined path for base href
+- [ ] auto generated systemjs.config
+- [ ] exclude typescript files from vendor
+- [ ] auto install all dependencies (concurrently, tsc)
 
 ### Samples
 This website uses my library:
@@ -25,11 +29,25 @@ First you have to setup the server side application : [Installation PHPAngular P
 
 #### PHPAngularisation !
 
-Run the script
+Create a package file package.Json
+```javascript
+{
+  "name": "phpangular-test",
+  "version": "1.0.0",
+  "dependencies": {
+    "phpangular": "^1.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^2.0.2",
+    "typings":"^1.3.2"
+    }
+}
 
 ```
 
-npm install phpangular --save
+Run the script
+
+```
 
 phpangular install
 
@@ -66,7 +84,7 @@ export class Index {
 Then use
 ```
     npm phpangular createRoute
-    npm start
+    npm run tsc
 ```
 
 ##### Repository
