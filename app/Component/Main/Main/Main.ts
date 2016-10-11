@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'phpangular-app',
   templateUrl: 'app/Component/Main/Main/Main.html'
 })
-export class MainComponent {
+export class Main {
     title: "PHPAngular 0.2"
 }

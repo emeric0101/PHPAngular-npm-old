@@ -9,14 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
-let MainComponent = class MainComponent {
+let Main = class Main {
 };
-MainComponent = __decorate([
+Main = __decorate([
     core_1.Component({
         selector: 'phpangular-app',
         templateUrl: 'app/Component/Main/Main/Main.html'
     }), 
     __metadata('design:paramtypes', [])
-], MainComponent);
-exports.MainComponent = MainComponent;
+], Main);
+exports.Main = Main;
 //# sourceMappingURL=Main.js.map

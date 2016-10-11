@@ -1,7 +1,7 @@
 "use strict";
 class Model {
-    constructor(name) {
-        this.name = name;
+    constructor(repositoryService) {
+        this.repositoryService = repositoryService;
         this.isFromDb = false;
         this._foreignKeys = []; // List of all foreign keys requested
         this.changed = false; // all base values to detect change
@@ -28,7 +28,7 @@ class Model {
     * @param success callback
     * @param error callback
     */
-    foreignKeys(repositoryService, field) {
+    foreignKeys(field) {
         var array = this[field];
         // If the value is not defined
         if (array === null) {
@@ -38,7 +38,7 @@ class Model {
             return [];
         }
         for (var i in this[field]) {
-            this.foreignKey(repositoryService, i, null, null, this[field]);
+            this.foreignKey(i, null, null, this[field]);
         }
         return this[field];
     }
@@ -50,7 +50,10 @@ class Model {
     * @param error callback
     * @param obj object to apply the foreginkey
     */
-    foreignKey(repositoryService, field, success, error, obj = null) {
+    foreignKey(field, success, error, obj = null) {
+        if (this.repositoryService == null) {
+            throw "Repository is needed in Entity !";
+        }
         if (typeof (success) === 'function' || typeof (error) === 'function') {
             // Il faut ajouter un systeme qui mette en file les callback pour qu'ils soient rappelé un fois
             // l'objet chargé, car on peut demander 2x le chargement et l'objet arrive apres donc il faut
@@ -82,7 +85,7 @@ class Model {
             obj[field] = objReceived;
             success(objReceived);
         };
-        repositoryService.findById(value['entity'], value['id'], callbackSuccess, error);
+        this.repositoryService.findById(value['entity'], value['id'], callbackSuccess, error);
         return obj[field];
     }
     setValues(values) {
@@ -102,8 +105,11 @@ class Model {
         this.isFromDb = true; // lock the model
     }
     // Update the entity from server
-    update(repositoryService) {
-        repositoryService.findById(this.name, this.id, (obj) => {
+    update() {
+        if (this.repositoryService == null) {
+            throw "RepositoryService needed by entity !";
+        }
+        this.repositoryService.findById(this.name, this.id, (obj) => {
             this.setValues(obj);
         });
     }

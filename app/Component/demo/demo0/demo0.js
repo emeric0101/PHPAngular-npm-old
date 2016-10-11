@@ -9,14 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
-let DemoComponent0 = class DemoComponent0 {
+let DemoDemo0 = class DemoDemo0 {
 };
-DemoComponent0 = __decorate([
+DemoDemo0 = __decorate([
     core_1.Component({
         selector: 'demo0',
         templateUrl: 'app/Component/demo/demo0/demo0.html'
     }), 
     __metadata('design:paramtypes', [])
-], DemoComponent0);
-exports.DemoComponent0 = DemoComponent0;
+], DemoDemo0);
+exports.DemoDemo0 = DemoDemo0;
 //# sourceMappingURL=demo0.js.map

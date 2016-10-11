@@ -34,12 +34,13 @@ class Request {
         private entities = [];
         private requests : Request[] = [];
         private requestTimer = null;
-
+        private $entityFactory : EntityFactory = null;
         public constructor(
             private $ajax : AjaxService,
-            private $entityFactory : EntityFactory,
             private $url : UrlService
-        ) {}
+        ) {
+            this.$entityFactory = new EntityFactory(this)
+        }
 
         public clearCache() {
             this.entities = [];

@@ -7,7 +7,7 @@ describe('entity.manager.test', () => {
         entityManager = new entity_manager_service_1.EntityManager(null, null, null);
     });
     it('persists', () => {
-        let obj = new Test_1.Test("test");
+        let obj = new Test_1.Test(null);
         let objs = entityManager.getPersistObjs();
         expect(objs).toEqual([]);
         entityManager.persist(obj);

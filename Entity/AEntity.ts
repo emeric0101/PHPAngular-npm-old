@@ -5,8 +5,13 @@ export abstract class Model {
     protected id : number;
     private isFromDb: boolean = false;
     private _foreignKeys : string[] = []; // List of all foreign keys requested
-
+    protected name;
     private changed = false; // all base values to detect change
+
+    public constructor(private repositoryService : RepositoryService) {
+
+    }
+
     public getChanged() {
         return this.changed || !this.isFromDb;
     }
@@ -32,7 +37,7 @@ export abstract class Model {
     * @param success callback
     * @param error callback
     */
-    protected foreignKeys(repositoryService : RepositoryService, field: string) {
+    protected foreignKeys(field: string) {
         var array = this[field];
         // If the value is not defined
         if (array === null) {
@@ -44,7 +49,7 @@ export abstract class Model {
 
 
         for (var i in this[field]) {
-            this.foreignKey(repositoryService, i, null, null, this[field]);
+            this.foreignKey(i, null, null, this[field]);
         }
         return this[field];
     }
@@ -58,12 +63,14 @@ export abstract class Model {
     * @param obj object to apply the foreginkey
     */
     protected foreignKey(
-        repositoryService : RepositoryService,
         field : string,
         success? : (obj : Model) => void,
         error? : () => void,
         obj = null
     ) {
+        if (this.repositoryService == null) {
+            throw "Repository is needed in Entity !";
+        }
             if (typeof(success) === 'function' || typeof(error) === 'function') {
                 // Il faut ajouter un systeme qui mette en file les callback pour qu'ils soient rappelé un fois
                 // l'objet chargé, car on peut demander 2x le chargement et l'objet arrive apres donc il faut
@@ -97,7 +104,7 @@ export abstract class Model {
                 obj[field] = objReceived;
                 success(objReceived);
             };
-            repositoryService.findById(value['entity'], value['id'], callbackSuccess, error);
+            this.repositoryService.findById(value['entity'], value['id'], callbackSuccess, error);
             return obj[field];
     }
 
@@ -120,13 +127,13 @@ export abstract class Model {
     }
 
     // Update the entity from server
-    update(repositoryService : RepositoryService) {
-        repositoryService.findById(this.name, this.id, (obj) => {
+    update() {
+        if (this.repositoryService == null) {
+            throw "RepositoryService needed by entity !";
+        }
+        this.repositoryService.findById(this.name, this.id, (obj) => {
             this.setValues(obj);
         });
     }
 
-    constructor(private name: string
-    ) {
-    }
 }

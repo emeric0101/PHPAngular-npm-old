@@ -1,11 +1,14 @@
 {
-  "name": "phpangular-test",
+  "name": "phpangular",
+  "description":"PHP7 and Angular2 using ES6 framework",
+  "repository": "https://github.com/emeric0101/PHPAngular-npm",
   "version": "1.0.0",
   "scripts": {
     "start": "tsc && concurrently \"npm run tsc:w\"",
     "postinstall": "typings install",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
+    "phpangular": "phpangular",
     "typings": "typings",
      "test": "tsc && concurrently \"tsc -w\" \"karma start karma.conf.js\""
   },

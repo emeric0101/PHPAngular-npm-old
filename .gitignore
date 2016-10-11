@@ -13,5 +13,8 @@ node_modules/*
 composer.lock
 typings/*
 app/*.js
+app/*/*.js
 *.map
 *.phar
+app/Service/entityfactory.service.ts
+app/Service/app.routing.ts

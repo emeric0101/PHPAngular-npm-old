@@ -34,13 +34,14 @@ class Request {
 }
 Request.globalrequestid = 1;
 let RepositoryService = class RepositoryService {
-    constructor($ajax, $entityFactory, $url) {
+    constructor($ajax, $url) {
         this.$ajax = $ajax;
-        this.$entityFactory = $entityFactory;
         this.$url = $url;
         this.entities = [];
         this.requests = [];
         this.requestTimer = null;
+        this.$entityFactory = null;
+        this.$entityFactory = new entityfactory_service_1.EntityFactory(this);
     }
     clearCache() {
         this.entities = [];
@@ -219,7 +220,7 @@ let RepositoryService = class RepositoryService {
 };
 RepositoryService = __decorate([
     core_1.Injectable(), 
-    __metadata('design:paramtypes', [ajax_service_1.AjaxService, entityfactory_service_1.EntityFactory, url_service_1.UrlService])
+    __metadata('design:paramtypes', [ajax_service_1.AjaxService, url_service_1.UrlService])
 ], RepositoryService);
 exports.RepositoryService = RepositoryService;
 //# sourceMappingURL=repository.service.js.map
