@@ -9,6 +9,7 @@ Thumbs.db
 
 nbproject/*
 vendor/*
+src/*
 node_modules/*
 composer.lock
 typings/*

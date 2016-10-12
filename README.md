@@ -12,8 +12,6 @@
 
 ### Todo
 - [ ] Combine post request into one
-- [ ] var defined path for base href
-- [ ] auto generated systemjs.config
 - [ ] exclude typescript files from vendor
 - [ ] auto install all dependencies (concurrently, tsc)
 
@@ -29,30 +27,117 @@ First you have to setup the server side application : [Installation PHPAngular P
 
 #### PHPAngularisation !
 
-Create a package file package.Json
+Create a package file package.json
 ```javascript
 {
   "name": "phpangular-test",
   "version": "1.0.0",
-  "dependencies": {
-    "phpangular": "^1.0.1"
+  "scripts": {
+    "start": "tsc && concurrently \"npm run tsc:w\"",
+    "postinstall": "typings install",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "phpangular": "phpangular",
+    "typings": "typings",
+    "test": "tsc && concurrently \"tsc -w\" \"karma start karma.conf.js\""
   },
-  "devDependencies": {
-    "typescript": "^2.0.2",
-    "typings":"^1.3.2"
-    }
+  "dependencies": {
+    "concurrently": "^3.1.0",
+    "phpangular": "^1.0.1"
+  }
 }
+
+```
+Create a tsconfig.js file
+```javascript
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": false
+  },
+  	"exclude": [
+		"vendor/*",
+		"node_modules/*"
+	]
+
+```
+
+Create a typings.js file
+```javascript
+{
+  "globalDependencies": {
+    "jasmine": "registry:dt/jasmine#2.5.0+20161003201800",
+    "node": "registry:dt/node#6.0.0+20161008175459"
+  }
+}
+
+```
+
+Create a systemjs.config.js file
+```javascript
+/**
+ * System configuration for Angular samples
+ * Adjust as necessary for your application needs.
+ */
+(function (global) {
+  System.config({
+    paths: {
+      // paths serve as alias
+      'npm:': 'node_modules/'
+    },
+    // map tells the System loader where to look for things
+    map: {
+      // our app is within the app folder
+      app: 'app',
+      // angular bundles
+      '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
+      '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
+      '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js',
+      '@angular/platform-browser': 'npm:@angular/platform-browser/bundles/platform-browser.umd.js',
+      '@angular/platform-browser-dynamic': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
+      '@angular/http': 'npm:@angular/http/bundles/http.umd.js',
+      '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
+      '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
+      // other libraries
+      'rxjs':                       'npm:rxjs',
+      'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api',
+	  'phpangular':	'npm:phpangular'
+    },
+    // packages tells the System loader how to load when no filename and/or no extension
+    packages: {
+      app: {
+        main: './main.js',
+        defaultExtension: 'js'
+      },
+      rxjs: {
+        defaultExtension: 'js'
+      },
+	  phpangular: {
+		defaultExtension: 'js'  
+	  },
+      'angular2-in-memory-web-api': {
+        main: './index.js',
+        defaultExtension: 'js'
+      }
+    }
+  });
+})(this);
 
 ```
 
 Run the script
 
 ```
-
+npm install
 phpangular install
 
 ```
-
 
 ### Usage
 The server side is in the "src" folder. Check https://github.com/emeric0101/PHPAngular/blob/master/README.md for how to use it.
